@@ -26,12 +26,13 @@ func main() {
 		panic(err)
 	}
 
-	texture, err := window.LoadTexture("../res/gfx/grass.png")
+	grass, err := window.LoadTexture("../res/gfx/grass.png")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating texture: %s", err.Error())
 	}
 
-	err = window.Draw(texture)
+	grassEntity := hastensdl.CreateEntity(0, 600, grass)
+	err = window.Draw(grassEntity)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error drawing texture: %s", err.Error())
 	}

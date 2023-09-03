@@ -21,20 +21,18 @@ func CreateRenderWindow(title string, w int32, h int32) (r RenderWindow, err err
 	return r, err
 }
 
-func (r *RenderWindow) Draw(texture *sdl.Texture) error {
-	src := sdl.Rect{}
-	src.X = 0
-	src.Y = 0
-	src.W = 32
-	src.H = 32
+func (r *RenderWindow) Draw(e *Entity) error {
+	src := e.GetCurrentFrame()
 
 	dst := sdl.Rect{}
-	dst.X = 0
-	dst.Y = 0
-	dst.W = 32
-	dst.H = 32
+	// TODO: Check if there is a way to represent the location as float.
+	dst.X = int32(e.GetX())
+	dst.Y = int32(e.GetY())
+	// TODO: Support w/h of other sizes
+	dst.W = src.W * 4
+	dst.H = src.H * 4
 
-	return r.renderer.Copy(texture, &src, &dst)
+	return r.renderer.Copy(e.GetTexture(), &src, &dst)
 }
 
 func (r *RenderWindow) Display() {
