@@ -26,7 +26,8 @@ int main(int argc, char *args[]) {
         return status;
     }
 
-    SDL_Texture *grass = RenderWindow_LoadTexture(&window, "res/gfx/grass.png");
+    SDL_Texture *grass =
+        RenderWindow_LoadTexture(&window, "../res/gfx/grass.png");
 
     Entity grassEntity;
     Entity_ctor(&grassEntity, 0, 600, grass);
