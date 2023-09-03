@@ -38,18 +38,13 @@ void RenderWindow_Clear(RenderWindow *self) {
 }
 
 void RenderWindow_Draw(RenderWindow *self, Entity *entity) {
-    SDL_Rect currentFrame = Entity_GetCurrentFrame(entity);
-    SDL_Rect src;
-    src.x = currentFrame.x;
-    src.y = currentFrame.y;
-    src.h = currentFrame.h;
-    src.w = currentFrame.w;
+    SDL_Rect src = Entity_GetCurrentFrame(entity);
 
     SDL_Rect dst;
     dst.x = Entity_GetX(entity);
     dst.y = Entity_GetY(entity);
-    dst.h = currentFrame.h * 4;
-    dst.w = currentFrame.w * 4;
+    dst.h = src.h * 4;
+    dst.w = src.w * 4;
 
     SDL_RenderCopy(self->_renderer, Entity_GetTexture(entity), &src, &dst);
 }
