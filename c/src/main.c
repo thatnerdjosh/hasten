@@ -5,8 +5,8 @@
 
 #include "renderwindow.h"
 
-const int gScreenWidth = 640;
-const int gScreenHeight = 480;
+const int gScreenWidth = 1280;
+const int gScreenHeight = 720;
 
 int main(int argc, char *args[]) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -21,7 +21,8 @@ int main(int argc, char *args[]) {
     }
 
     RenderWindow window;
-    int status = RenderWindow_ctor(&window, "GAME v1.0", 1280, 720);
+    int status =
+        RenderWindow_ctor(&window, "GAME v1.0", gScreenWidth, gScreenHeight);
     if (status != 0) {
         return status;
     }
@@ -30,7 +31,7 @@ int main(int argc, char *args[]) {
         RenderWindow_LoadTexture(&window, "../res/gfx/grass.png");
 
     Entity grassEntity;
-    Entity_ctor(&grassEntity, 0, 600, grass);
+    Entity_ctor(&grassEntity, 0, gScreenHeight - 256, grass);
 
     RenderWindow_Clear(&window);
     RenderWindow_Draw(&window, &grassEntity);

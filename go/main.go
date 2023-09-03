@@ -9,6 +9,11 @@ import (
 	hastensdl "github.com/thatnerdjosh/hasten/go/pkg/sdl"
 )
 
+const (
+	gScreenWidth  int32 = 1280
+	gScreenHeight int32 = 720
+)
+
 func main() {
 	if err := sdl.Init(sdl.INIT_VIDEO); err != nil {
 		panic(err)
@@ -20,7 +25,7 @@ func main() {
 
 	defer sdl.Quit()
 
-	window, err := hastensdl.CreateRenderWindow("Test Game", 1280, 720)
+	window, err := hastensdl.CreateRenderWindow("Test Game", gScreenWidth, gScreenHeight)
 	if err != nil {
 		// TODO: Handle errors better
 		panic(err)
@@ -31,7 +36,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error creating texture: %s", err.Error())
 	}
 
-	grassEntity := hastensdl.CreateEntity(0, 600, grass)
+	grassEntity := hastensdl.CreateEntity(0, float32(gScreenHeight)-256, grass)
 	err = window.Draw(grassEntity)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error drawing texture: %s", err.Error())
