@@ -22,14 +22,18 @@ int main(int argc, char *args[]) {
 
     RenderWindow window;
     int status = RenderWindow_ctor(&window, "GAME v1.0", 1280, 720);
-    if(status != 0) {
+    if (status != 0) {
         return status;
     }
 
-    SDL_Surface *screenSurface = SDL_GetWindowSurface((&window)->_window);
-    SDL_FillRect(screenSurface, NULL,
-                 SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-    SDL_UpdateWindowSurface((&window)->_window);
+    SDL_Texture *grass = RenderWindow_LoadTexture(&window, "res/gfx/grass.png");
+
+    Entity grassEntity;
+    Entity_ctor(&grassEntity, 0, 600, grass);
+
+    RenderWindow_Clear(&window);
+    RenderWindow_Draw(&window, &grassEntity);
+    RenderWindow_Display(&window);
 
     // Hack to get window to stay up
     SDL_Event e;
